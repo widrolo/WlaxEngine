@@ -18,9 +18,9 @@ fc /b Cache\Intermediate\Build\Flax.Build.Files.txt Cache\Intermediate\Build\Fla
 if not errorlevel 1 goto SkipClean
 
 copy /y Cache\Intermediate\Build\Flax.Build.Files.txt Cache\Intermediate\Build\Flax.Build.PrevFiles.txt >nul
-%MSBUILD_PATH% /nologo /verbosity:quiet Source\Tools\Flax.Build\Flax.Build.csproj /property:Configuration=Release /target:Restore,Clean /property:RestorePackagesConfig=True /p:RuntimeIdentifiers=win-x64
+%MSBUILD_PATH% Source\Tools\Flax.Build\Flax.Build.csproj /property:Configuration=Release /target:Restore,Clean /property:RestorePackagesConfig=True
 :SkipClean
-%MSBUILD_PATH% /nologo /verbosity:quiet Source\Tools\Flax.Build\Flax.Build.csproj /property:Configuration=Release /target:Build /property:SelfContained=False /property:RuntimeIdentifiers=win-x64
+%MSBUILD_PATH% Source\Tools\Flax.Build\Flax.Build.csproj /property:Configuration=Release /target:Build /property:SelfContained=False
 if errorlevel 1 goto Error_CompilationFailed
 
 Binaries\Tools\Flax.Build.exe %*
